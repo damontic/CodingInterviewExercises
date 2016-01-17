@@ -1,0 +1,3 @@
+Implement this one in C.
+void reverse(char str*)
+Reverses a null-terminated string.
