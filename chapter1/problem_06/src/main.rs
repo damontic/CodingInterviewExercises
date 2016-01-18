@@ -1,16 +1,16 @@
 use std::io::stdin;
 
 fn rotate_90(matrix : Vec<Vec<u8>>) -> Vec<Vec<u8>> {
+    let mut rotated_matrix = Vec::new();
     let dimensions = matrix.len();
-    let mut result = Vec::new();
-    for _ in 0..dimensions {
+    for i in 0..dimensions {
         let mut row = Vec::new();
-        for _ in 0..dimensions {
-            row.push(0);
+        for j in 0..dimensions {
+            row.push(matrix[j][dimensions-i-1]);
         }
-        result.push(row);
+        rotated_matrix.push(row);
     }
-    result
+    rotated_matrix
 }
 
 fn main() {
