@@ -1,23 +1,33 @@
 use std::io::stdin;
+use std::collections::HashSet;
 
 fn put_zeros(matrix : Vec<Vec<u8>>) -> Vec<Vec<u8>> {
+    let mut row_indices = HashSet::new();
+    let mut col_indices = HashSet::new();
+    
     let dimensions = matrix.len();
-    let mut result = Vec::new();
-    for i in 0..dimensions {
-        let mut row = Vec::new();
+    'outer: for i in 0..dimensions {
         for j in 0..dimensions {
             if matrix[i][j] == 0 {
-                row.clear();
-                for _ in 0..dimensions{
-                    row.push(0);
-                }
-                result.push(row);
+                row_indices.insert(i);
+                col_indices.insert(j);
+                break 'outer
             }
-            row.push(matrix[i][j]);
         }
-        result.push(row);
     }
-    result
+    
+    let mut matrix = matrix;
+    for i in row_indices {
+        for j in 0..dimensions {
+            matrix[i][j] = 0;
+        }
+    }
+    for i in col_indices {
+        for j in 0..dimensions {
+            matrix[j][i] = 0;
+        }
+    }
+    matrix
 }
 
 fn main() {
@@ -32,4 +42,36 @@ fn main() {
         matrix.push(row);
     }
     println!("{:?}", put_zeros(matrix));
+}
+
+#[test]
+fn test_put_zeros(){
+    let mut m1 = Vec::new();
+    m1.push(vec![1,2,3,4]);
+    m1.push(vec![5,0,7,8]);
+    m1.push(vec![9,10,11,12]);
+    m1.push(vec![13,14,15,16]);
+
+    let mut m2 = Vec::new();
+    m2.push(vec![1,0,3,4]);
+    m2.push(vec![0,0,0,0]);
+    m2.push(vec![9,0,11,12]);
+    m2.push(vec![13,0,15,16]);
+    
+    assert_eq!(put_zeros(m1), m2);
+
+    let mut m3 = Vec::new();
+    m3.push(vec![1,2,3,4]);
+    m3.push(vec![5,0,7,8]);
+    m3.push(vec![9,10,0,12]);
+    m3.push(vec![13,14,15,0]);
+
+    let mut m4 = Vec::new();
+    m4.push(vec![1,0,0,0]);
+    m4.push(vec![0,0,0,0]);
+    m4.push(vec![0,0,0,0]);
+    m4.push(vec![0,0,0,0]);
+    
+    assert_eq!(put_zeros(m3), m4);
+
 }

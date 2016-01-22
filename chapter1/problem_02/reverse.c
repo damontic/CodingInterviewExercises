@@ -4,7 +4,6 @@
 
 void reverse(char* str){
   int myStringLength = strlen(str);
-  char* newString = malloc(sizeof(char) * myStringLength);
   char temp;
   for(int i = 0; i < myStringLength/2; i++){
     temp = str[i];
