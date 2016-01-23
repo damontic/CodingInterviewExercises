@@ -1,7 +1,7 @@
 use std::env::args;
 use std::io::stdin;
 
-fn make_spaces_url_compatible(some_string : String) -> String {
+fn make_spaces_url_compatible(some_string : &str) -> String {
     some_string.replace(" ", "%20")
 }
 
@@ -14,13 +14,13 @@ fn main() {
             input
         }
     };
-    println!("{}", make_spaces_url_compatible(input));
+    println!("{}", make_spaces_url_compatible(&input));
 }
 
 #[test]
 fn test_make_spaces_url_compatible_true(){
-    assert!(make_spaces_url_compatible("hello world".to_string()) == "hello%20world".to_string());
-    assert!(make_spaces_url_compatible(" he llo wor ld".to_string()) == "%20he%20llo%20wor%20ld".to_string());
-    assert!(make_spaces_url_compatible(" ".to_string()) == "%20".to_string());
-    assert!(make_spaces_url_compatible("%20 %20".to_string()) == "%20%20%20".to_string());
+    assert!(make_spaces_url_compatible("hello world") == "hello%20world");
+    assert!(make_spaces_url_compatible(" he llo wor ld") == "%20he%20llo%20wor%20ld");
+    assert!(make_spaces_url_compatible(" ") == "%20");
+    assert!(make_spaces_url_compatible("%20 %20") == "%20%20%20");
 }

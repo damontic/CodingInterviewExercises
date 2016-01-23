@@ -1,7 +1,7 @@
 use std::env::args;
 use std::io::stdin;
 
-fn basic_string_compression(some_string : String) -> String {
+fn basic_string_compression(some_string : &str) -> String {
     let mut compressed = String::new();
     let mut previous_char : char = '!';
     let mut counter = 0;
@@ -19,7 +19,7 @@ fn basic_string_compression(some_string : String) -> String {
     compressed = compressed + &counter.to_string();
     let result = compressed[2..].to_string();
     if result.len() > some_string.len() {
-        some_string
+        some_string.to_string()
     }else{
         result
     }
@@ -34,13 +34,13 @@ fn main() {
             input
         }
     };
-    print!("{}", basic_string_compression(input));
+    print!("{}", basic_string_compression(&input));
 }
 
 #[test]
 fn test_basic_string_compression_true() {
-    assert_eq!(basic_string_compression("aaabbbccc".to_string()), "a3b3c3".to_string());
-    assert_eq!(basic_string_compression("abbbcdddddd".to_string()), "a1b3c1d6".to_string());
-    assert_eq!(basic_string_compression("abcd".to_string()), "abcd".to_string());
-    assert_eq!(basic_string_compression("ccccccccccbbaaaaa".to_string()), "c10b2a5".to_string());
+    assert_eq!(basic_string_compression("aaabbbccc"), "a3b3c3");
+    assert_eq!(basic_string_compression("abbbcdddddd"), "a1b3c1d6");
+    assert_eq!(basic_string_compression("abcd"), "abcd");
+    assert_eq!(basic_string_compression("ccccccccccbbaaaaa"), "c10b2a5");
 }

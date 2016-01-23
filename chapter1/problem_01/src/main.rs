@@ -4,7 +4,7 @@ use std::collections::HashMap;
 
 static ERR_STDIN_INPUT : &'static str = "PROBLEM READING FROM STDIN";
 
-fn has_all_unique_characters(my_string : String) -> bool {
+fn has_all_unique_characters(my_string : &str) -> bool {
     let mut characters_map = HashMap::new();
     for i in my_string.chars() {
         if characters_map.contains_key(&i){
@@ -30,7 +30,7 @@ fn main() {
             input_string
         }
     };
-    println!("{}", has_all_unique_characters(input_string));
+    println!("{}", has_all_unique_characters(&input_string));
 }
 
 #[test]

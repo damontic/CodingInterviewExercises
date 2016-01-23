@@ -2,7 +2,7 @@ use std::io::stdin;
 use std::env::args;
 use std::collections::HashMap;
 
-fn is_permutation(word1 : String, word2 : String) -> bool {
+fn is_permutation(word1 : &str, word2 : &str) -> bool {
     let mut character_map = HashMap::new();
     for i in word1.chars(){
         if character_map.contains_key(&i) {
@@ -41,22 +41,17 @@ fn get_arg(n : usize) -> String {
 fn main() {
     let word1 : String = get_arg(1);
     let word2 : String = get_arg(2);
-    println!("{}", is_permutation(word1, word2));
+    println!("{}", is_permutation(&word1, &word2));
 }
 
 #[test]
-fn test_is_permutation_true(){
-    assert!(is_permutation("buenas".to_string(), "buenas".to_string()));
-    assert!(is_permutation("anitalavalatina".to_string(), "anitalavalatina".to_string()));
-    assert!(is_permutation("qwertyuiop".to_string(), "poiuytrewq".to_string()));
-    assert!(is_permutation("zmqp".to_string(), "qpmz".to_string()));
-}
-
-#[test]
-#[should_panic]
-fn test_is_permutation_false(){
-    assert!(is_permutation("buenas".to_string(), "buena".to_string()));
-    assert!(is_permutation("aanitalavalatina".to_string(), "anitalavalatina".to_string()));
-    assert!(is_permutation("aqwertyuiop".to_string(), "poiuytrewq".to_string()));
-    assert!(is_permutation("azmqp".to_string(), "qpmz".to_string()));
+fn test_is_permutation(){
+    assert!(is_permutation("buenas", "buenas"));
+    assert!(is_permutation("anitalavalatina", "anitalavalatina"));
+    assert!(is_permutation("qwertyuiop", "poiuytrewq"));
+    assert!(is_permutation("zmqp", "qpmz"));
+    assert!(!is_permutation("buenas", "buena"));
+    assert!(!is_permutation("aanitalavalatina", "anitalavalatina"));
+    assert!(!is_permutation("aqwertyuiop", "poiuytrewq"));
+    assert!(!is_permutation("azmqp", "qpmz"));
 }
