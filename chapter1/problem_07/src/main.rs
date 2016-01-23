@@ -6,12 +6,12 @@ fn put_zeros(matrix : Vec<Vec<u8>>) -> Vec<Vec<u8>> {
     let mut col_indices = HashSet::new();
     
     let dimensions = matrix.len();
-    'outer: for i in 0..dimensions {
+    for i in 0..dimensions {
         for j in 0..dimensions {
             if matrix[i][j] == 0 {
                 row_indices.insert(i);
                 col_indices.insert(j);
-                break 'outer
+                break
             }
         }
     }
