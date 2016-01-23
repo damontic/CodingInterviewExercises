@@ -1,0 +1,6 @@
+[package]
+name = "problem_01"
+version = "0.1.0"
+authors = ["David Alberto Montaño Fetecua <damontic@gmail.com>"]
+
+[dependencies]
