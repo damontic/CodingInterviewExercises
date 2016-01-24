@@ -18,7 +18,7 @@ void Node_destroy(Node* node){
     Node* to_delete = n;
     n = n->next;
     free(to_delete);
-    }
+  }
   free(n);
 }
 
