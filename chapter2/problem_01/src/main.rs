@@ -1,6 +1,21 @@
 use std::io::stdin;
 use std::env::args;
 use std::collections::LinkedList;
+use std::collections::HashMap;
+
+fn remove_duplicates2(some_list : LinkedList<u8>) -> LinkedList<u8> {
+    let mut dict : HashMap<u8, u8> = HashMap::new();
+    let mut result : LinkedList<u8> = LinkedList::new();
+    for new_elem in some_list.iter() {
+        if !dict.contains_key(new_elem) {
+            dict.insert(*new_elem, *new_elem);
+        }
+    }
+    for val in dict.values(){
+        result.push_back(*val);
+    }
+    result
+}
 
 fn remove_duplicates(some_list : LinkedList<u8>) -> LinkedList<u8> {
     let mut result : LinkedList<u8> = LinkedList::new();
@@ -57,6 +72,32 @@ fn test_remove_duplicates(){
     let mut test_linked_list_result2 : LinkedList<u8> = LinkedList::new();
     test_linked_list_result2.push_front(2);
     test_linked_list_result2.push_front(3);
-    assert_eq!(remove_duplicates(test_linked_list2), test_linked_list_result2);    
-    
+    assert_eq!(remove_duplicates(test_linked_list2), test_linked_list_result2);        
+}
+
+#[test]
+fn test_remove_duplicates2(){
+    let mut test_linked_list : LinkedList<u8> = LinkedList::new();
+    test_linked_list.push_front(2);
+    test_linked_list.push_front(2);
+    test_linked_list.push_front(3);
+    test_linked_list.push_front(4);
+    test_linked_list.push_front(5);
+    let mut test_linked_list_result : LinkedList<u8> = LinkedList::new();
+    test_linked_list_result.push_front(2);
+    test_linked_list_result.push_front(3);
+    test_linked_list_result.push_front(4);
+    test_linked_list_result.push_front(5);
+    assert_eq!(remove_duplicates2(test_linked_list), test_linked_list_result);
+
+    let mut test_linked_list2 : LinkedList<u8> = LinkedList::new();
+    test_linked_list2.push_front(2);
+    test_linked_list2.push_front(2);
+    test_linked_list2.push_front(3);
+    test_linked_list2.push_front(3);
+    test_linked_list2.push_front(3);
+    let mut test_linked_list_result2 : LinkedList<u8> = LinkedList::new();
+    test_linked_list_result2.push_front(2);
+    test_linked_list_result2.push_front(3);
+    assert_eq!(remove_duplicates2(test_linked_list2), test_linked_list_result2);        
 }
