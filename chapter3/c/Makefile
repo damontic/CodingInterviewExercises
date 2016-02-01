@@ -4,7 +4,7 @@ all: obj bin stack.o stack_min.o queue.o set_stack.o
 	gcc $(CFLAGS) -o bin/test -Iinclude src/test.c obj/stack.o obj/node.o obj/queue.o
 	gcc $(CFLAGS) -o bin/problem_01 src/problem_01.c
 	gcc $(CFLAGS) -o bin/problem_02 -Iinclude src/problem_02.c obj/stack_min.o obj/node.o obj/stack.o
-	gcc $(CFLAGS) -o bin/problem_03 -Iinclude src/problem_03.c obj/set_stack.o obj/node.o
+	gcc $(CFLAGS) -o bin/problem_03 -Iinclude src/problem_03.c obj/stack.o obj/set_stack.o obj/node.o
 
 
 queue.o: node.o
