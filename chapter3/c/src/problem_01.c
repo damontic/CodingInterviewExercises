@@ -62,20 +62,20 @@ unsigned int Stack3_pop(Stack3* self_p, size_t stack_index){
   switch(stack_index){
     case 1:
       if(self_p->stack1_index > 0){
-        result = self_p->stacks[self_p->stack1_index];
         self_p->stack1_index--;
+        result = self_p->stacks[self_p->stack1_index];
       }
       break;
     case 2:
       if(self_p->stack2_index > self_p->stack1_dim){
-        result = self_p->stacks[self_p->stack2_index];
         self_p->stack2_index--;
+        result = self_p->stacks[self_p->stack2_index];
       }
       break;
     case 3:
-      if(self_p->stack3_index > self_p->stack1_dim + self_p->stack2_dim){
-        result = self_p->stacks[self_p->stack3_index];
+      if(self_p->stack3_index > self_p->stack2_dim){
         self_p->stack3_index--;
+        result = self_p->stacks[self_p->stack3_index];
       }
       break;
   }
@@ -84,12 +84,22 @@ unsigned int Stack3_pop(Stack3* self_p, size_t stack_index){
 
 int main(){
   Stack3* stack = Stack3_create(5,5,5);
-  Stack3_push(stack, 3, 3);
-  Stack3_push(stack, 2, 2);
-  Stack3_push(stack, 1, 1);
+  Stack3_push(stack, 3, 31);
+  Stack3_push(stack, 2, 21);
+  Stack3_push(stack, 1, 11);
+  Stack3_push(stack, 3, 32);
+  Stack3_push(stack, 2, 22);
+  Stack3_push(stack, 1, 12);
+  Stack3_push(stack, 3, 33);
+  Stack3_push(stack, 2, 23);
+  Stack3_push(stack, 1, 13);
 
-  unsigned int result = Stack3_pop(stack, 1);
-  printf("%d\n", result);
+  printf("%u\n", Stack3_pop(stack, 1));
+  printf("%u\n", Stack3_pop(stack, 2));
+  printf("%u\n", Stack3_pop(stack, 3));
+  printf("%u\n", Stack3_pop(stack, 1));
+  printf("%u\n", Stack3_pop(stack, 2));
+  printf("%u\n", Stack3_pop(stack, 3));
   
   Stack3_destroy(&stack);
   return EXIT_SUCCESS;
