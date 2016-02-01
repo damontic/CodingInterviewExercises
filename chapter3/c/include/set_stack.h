@@ -7,6 +7,7 @@
 typedef struct _set_stack_uint_t {
   size_t threshold;
   size_t length;
+  size_t stack_count;
   stack_uint_t** stacks;
 } set_stack_uint_t ;
 set_stack_uint_t* set_stack_uint_new(size_t threshold, unsigned int data);
